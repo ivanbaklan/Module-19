@@ -70,14 +70,14 @@ def fitst_query_set():
         title="Cyber punk 2077",
         cost=31,
         size=46.2,
-        description="How kills Mark?",
+        description="Game of the year.",
         age_limited=True,
     )
     game2 = Game.objects.create(
         title="Mario",
         cost=5,
         size=0.5,
-        description="How kills Mark?",
+        description="Old Game.",
         age_limited=False,
     )
     game3 = Game.objects.create(
