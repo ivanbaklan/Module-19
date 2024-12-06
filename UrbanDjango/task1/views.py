@@ -90,3 +90,23 @@ def fitst_query_set():
     Game.objects.get(id=game1.id).buyer.set((first_buyer, second_buyer))
     Game.objects.get(id=game2.id).buyer.set((first_buyer, second_buyer, third_buyer))
     Game.objects.get(id=game3.id).buyer.set((first_buyer,))
+
+
+def admin_task():
+    game4 = Game.objects.create(
+        title="Test",
+        cost=12,
+        size=36.6,
+        description="-",
+        age_limited=True,
+    )
+
+    game4.title = "Change title"
+    game4.save()
+    all_game = Game.objects.all()
+    print(all_game)
+    game4.delete()
+    all_game = Game.objects.all()
+    print(all_game)
+    filtered = list(Game.objects.filter(age_limited=True))
+    print(filtered)
