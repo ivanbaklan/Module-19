@@ -1,6 +1,23 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+
 from .forms import UserRegister
 from .models import Buyer, Game
+
+
+class GameListView(ListView):
+    model = Game
+    template_name = "task1/game_list.html"
+    context_object_name = "games"
+
+    def get_paginate_by(self, queryset):
+        paginate_by = self.request.GET.get("paginate_by", 1)
+        return int(paginate_by)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["paginate_by"] = self.get_paginate_by(self.get_queryset())
+        return context
 
 
 def validate_vals(username, password, repeat_password, age, info, users):
