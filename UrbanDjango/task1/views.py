@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from .forms import UserRegister
-from .models import Buyer, Game
+from .models import Buyer, Game, Test
 
 
 class GameListView(ListView):
@@ -127,3 +127,28 @@ def admin_task():
     print(all_game)
     filtered = list(Game.objects.filter(age_limited=True))
     print(filtered)
+
+
+def postgres_task():
+    test_obj_1 = Test.objects.create(
+        name="Test_1",
+    )
+    test_obj_2 = Test.objects.create(
+        name="Test_2",
+    )
+    test_obj_3 = Test.objects.create(
+        name="Test_3",
+    )
+    test_obj_1.name = "Change name"
+    test_obj_1.save()
+    all_test_obj = Test.objects.all()
+    print(all_test_obj)
+    get_object = Test.objects.get(id=test_obj_1.id)
+    print(get_object)
+    test_obj_1.delete()
+    all_test_obj = Test.objects.all()
+    print(all_test_obj)
+    filtered = list(Test.objects.filter(id=2))
+    print(filtered)
+    count = Test.objects.filter(id__gte=1).count()
+    print(count)
